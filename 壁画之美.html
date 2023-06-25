@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>图片幻灯片</title>
+	<link rel="stylesheet" href="./style.css">
+	<style>
+		@font-face {
+			font-family: 'Onettf';
+			src: url('ttf/HanyiSentyBrushSong.ttf') format('truetype');
+
+		}
+
+
+		body {
+			font-family: 'Onettf', sans-serif;
+
+			background-color: #bc5c3c;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container1 {
+			background-image: url('Img/壁画/背景一.jpg');
+			background-size: cover;
+			background-position: center;
+			width: 100%;
+			height: 1000px;
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			animation: slideIn 1s forwards;
+		}
+
+		.image {
+			width: 300px;
+			height: 450px;
+			margin-top: 1%;
+			border-radius: 5%;
+			border: 5px solid #fff;
+			box-shadow: 0 0 10px #fff;
+		}
+
+		.imagewithoutmovement {
+			width: 200px;
+			height: 300px;
+			margin: 3%;
+			border-radius: 5px;
+			border: 5px solid #fff;
+			box-shadow: 0 0 10px #fff;
+		}
+
+		.cont_txt {
+			position: absolute;
+			width: 80%;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 80px;
+			font-weight: bold;
+			letter-spacing: 5px;
+			/* border: 1px solid #000; */
+			color: #ffffff;
+			text-align: center;
+			text-shadow: 0px 0px 10px rgb(0, 0, 0);
+		}
+
+		.navbar {
+			position: relative;
+			/* 需要设置 relative 以便 ::before 可以正确定位 */
+			color: #fff;
+			padding: 20px;
+			font-size: 20px;
+
+		}
+
+		.navbar::before {
+			content: "";
+			position: absolute;
+			/* 使伪元素填充整个 .navbar */
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-image: url(Img/壁画/敦煌图案介绍3.jpg);
+			filter: blur(5px);
+			/* 在这里应用滤镜效果 */
+			z-index: -1;
+			/* 确保伪元素在 .navbar 的内容后面 */
+		}
+
+		.navbar ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.navbar li {
+			display: inline-block;
+			margin-right: 10px;
+			position: relative;
+		}
+
+
+		.navbar li a {
+			color: #fff;
+			text-decoration: none;
+			padding: 5px;
+			font-size: 30px;
+			font-weight: bold;
+		}
+
+		.navbar li:hover::after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: -10px;
+			width: 100%;
+			/* width: 100%; */
+			border: 3px solid #5e3114;
+		}
+
+		.navbar li a:hover {
+			color: #5e3114;
+		}
+
+		.img1 {
+			margin: 70px;
+			margin-bottom: 350px;
+			width: 300px;
+			height: 210px;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			height: 100vh;
+			/* 设置容器高度为视口的高度，可根据需要调整 */
+		}
+
+		.image-wrapper {
+			width: 100%;
+			/* border: 1px solid #000; */
+			display: flex;
+			justify-content: space-around;
+		}
+
+		.imgbig {
+			border-radius: 5px;
+			border: 5px solid #fff;
+			box-shadow: 0 0 10px #fff;
+			height: 450px;
+			width: 810px;
+		}
+
+		p {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/* padding-left: 20%; */
+			/* 设置左边距为 20 像素 */
+			/* padding-right: 20%; */
+			/* 设置右边距为 20 像素 */
+		}
+
+		img {
+			margin: 30px;
+			/* 图片之间的间距，可根据需要调整 */
+		}
+
+		.cont_h1 {
+			letter-spacing: 80px;
+			font-size: 100px;
+			display: inline-block;
+			position: absolute;
+			left: 100px;
+			/* top: 150px; */
+			color: #fff;
+			text-shadow: 2px 2px 2px#000;
+			margin: 50px 50px 0 50px !important;
+		}
+
+		.cont_p {
+			position: absolute;
+			right: 100px;
+			/* top: 100px; */
+			width: 905px;
+			font-size: 25px;
+			/* border: 1px solid #000; */
+			display: inline-block;
+			line-height: 50px;
+			letter-spacing: 5px;
+			color: #fff;
+			text-shadow: 2px 2px 2px#000;
+			text-align: left;
+		}
+
+		.cont_top {
+			margin-top: 10px;
+			width: 100%;
+			color: #fff;
+			text-shadow: 3px 3px 3px #000;
+			height: 510px !important;
+			position: relative;
+			/* border: 1px solid red; */
+		}
+
+		.cont_p2 {
+			position: absolute;
+			left: 100px;
+			/* top: 100px; */
+			width: 970px;
+			font-size: 25px;
+			/* border: 1px solid #000; */
+			display: inline-block;
+			line-height: 70px;
+			letter-spacing: 5px;
+			color: #fff;
+			text-shadow: 2px 2px 2px#000;
+			text-align: left;
+		}
+
+		.cont_h5 {
+			letter-spacing: 80px;
+			font-size: 100px;
+			/* border: 1px solid #000; */
+			display: inline-block;
+			position: absolute;
+			right: 0px;
+			/* top: 150px; */
+			color: #fff;
+			text-shadow: 2px 2px 2px#000;
+			margin: 50px 50px 0 50px !important;
+		}
+	</style>
+
+	<title>敦煌壁画</title>
+</head>
+
+
+
+<body>
+	<!--<div class="container">-->
+	<div class="navbar">
+		<ul>
+			<li>
+				<a href="index.html">首页</a>
+			</li>
+			<li>
+				<a href="#">壁画之美</a>
+			</li>
+			<li>
+				<a href="历史步伐.html">历史步伐</a>
+			</li>
+			<li>
+				<a href="文创产品.html">文创产品</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="container1">
+		<div class="cont_txt">
+			<span>壁画之美</span>
+		</div>
+		<img src="Img/壁画/九色鹿.jpg" alt="Image 1" class="imagewithoutmovement">
+
+		<img src="Img/壁画/飞天.jpg" alt="Image 2" class="imagewithoutmovement">
+
+		<img src="Img/壁画/法华经变.jpg" alt="Image 3" class="imagewithoutmovement">
+
+		<img src="Img/壁画/敦煌图案.jpg" alt="Image 4" class="imagewithoutmovement">
+
+	</div>
+
+	<div class="container"
+		style="background: url(Img/壁画/背景二.jpg) no-repeat;height: 2710px; background-size: 100% 100%;">
+		<div class="cont_top" style="height: 800px;">
+			<h5 class="cont_h1">飞天</h5>
+			<p class="cont_p">敦煌飞天指的就是画在敦煌石窟中的飞神。它是印度佛教天人和中国
+				教羽人、西域飞天和中原飞天长期交流、融合为一，具有中国文化特
+				的飞天。莫高窟的492个洞窟中，几乎皆画有飞天。它们不长翅膀，不
+				羽毛，借助云彩而不依靠云彩，而是凭借飘曳的衣裙，飞舞的彩带凌
+				翱翔。千姿百态，千变万化。</p>
+		</div>
+
+		<div class="image-wrapper">
+			<img class="imgbig" src="Img/壁画/飞天介绍1.jpg" alt="图片1">
+			<img class="imgbig" src="Img/壁画/飞天介绍2.jpg" alt="图片2">
+		</div>
+		<div class="cont_top" style="height: 800px;">
+			<p class=" cont_p2">敦煌壁画中《鹿王本纪》讲述了善良的九色鹿在恒河救起一落水者，此
+				人获救之后却忘恩负义，向宫廷告密，并带领国王一行捕捉九色鹿，最
+				后受到惩罚的因果报应故事。鹿九色鹿依旧被视为福禄吉祥的美好化
+				身。作为至善至美的象征，九色鹿形象也深受大众喜爱</p>
+			<h5 class=" cont_h5">九色鹿</h5>
+		</div>
+
+		<img style="width: 1450px;height: 570px;" src="Img/壁画/九色鹿介绍.jpeg" alt="图片3" class="image">
+		<div class="cont_top" style="height: 800px;">
+			<h5 class="cont_h1" style="width: 400px;">法华经变</h5>
+
+			<p class="cont_p">《法华经》是一部重要的大乘经典，在中国广泛流行，主要有三个译
+				本：（晋）竺法护译《正法华经》10卷27品，（后秦）鸠摩罗什译《妙法
+				莲华经》7卷28品，（隋）阇那崛多和达摩笈多译《添品妙法莲华经》7 卷
+				27品，鸠摩罗什译本最为流行。中土佛寺出现的大型法华经变，成为莫高
+				窟同期法华经变壁画的绘画依据。</p>
+		</div>
+		<div class="image-wrapper">
+			<img class="imgbig" src="Img/壁画/法华经变介绍1.jpg" alt="图片1">
+			<img class="imgbig" src="Img/壁画/法华经变介绍2.jpg" alt="图片2">
+		</div>
+	</div>
+	<div class="container"
+		style="background: url(Img/壁画/背景二.jpg) no-repeat;height: 152vh; background-size: 100% 100%; ">
+		<div class="cont_top" style="height: 800px;">
+			<p class=" cont_p2" style="width: 720px;">敦煌图案是敦煌石窟艺术的一个重要组成部分，它装
+				饰于建筑（石窟本体及其木构窟檐）、塑像与壁画，
+				同时也具有自身的独立形态。图案在不同时代有独特
+				的风格</p>
+			<h5 class=" cont_h5" style="width: 400px;">敦煌图案</h5>
+		</div>
+		<div class="image-wrapper" style="margin-top: -200px;">
+			<img class="imgbig" src="Img/壁画/敦煌图案介绍1.jpg" alt="图片1">
+			<img class="imgbig" src="Img/壁画/敦煌图案介绍2.jpg" alt="图片2">
+		</div>
+
+
+
+		<img style="width: 90%;height: 270px;" src="Img/壁画/敦煌图案介绍3.jpg" alt="图片3" class="image">
+		<img style="width:88%;height: 270px;" src="Img/壁画/敦煌图案介绍4.jpg" alt="图片3" class="image">
+
+
+</body>
+<script src="1.js"></script>
+<script>
+
+</script>
+
+</html>

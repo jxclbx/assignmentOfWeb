@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!-- <link rel="stylesheet" href="./style.css"> -->
+	<title>图片幻灯片</title>
+	<style>
+		@keyframes slideUpFadeIn {
+			0% {
+				opacity: 0;
+				transform: translateX(-180px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		.animate {
+			animation: slideUpFadeIn 1s ease-in-out forwards;
+		}
+
+		/* 全局样式 */
+		@font-face {
+			font-family: 'Onettf';
+			src: url('ttf/HanyiSentyBrushSong.ttf') format('truetype');
+
+		}
+
+		body {
+			font-family: 'Onettf', sans-serif;
+			/*background-color: #bc5c3c;*/
+			margin: 0;
+			padding: 0;
+		}
+
+		/* 导航栏样式 */
+		.navbar {
+			position: relative;
+			/* 需要设置 relative 以便 ::before 可以正确定位 */
+			color: #fff;
+			padding: 20px;
+			font-size: 20px;
+
+		}
+
+		.navbar::before {
+			content: "";
+			position: absolute;
+			/* 使伪元素填充整个 .navbar */
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-image: url(Img/历史步伐素材包/背景图1.jpg);
+			filter: blur(10px);
+			/* 在这里应用滤镜效果 */
+			z-index: -1;
+			/* 确保伪元素在 .navbar 的内容后面 */
+		}
+
+		.navbar ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.navbar li {
+			display: inline-block;
+			margin-right: 10px;
+			position: relative;
+		}
+
+
+		.navbar li a {
+			color: #fff;
+			text-decoration: none;
+			padding: 5px;
+			font-size: 30px;
+			font-weight: bold;
+		}
+
+		.navbar li:hover::after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: -10px;
+			width: 100%;
+			/* width: 100%; */
+			border: 3px solid #5e3114;
+		}
+
+		.navbar li a:hover {
+			color: #5e3114;
+		}
+
+		.container {
+			position: relative;
+		}
+
+		.text-overlay {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			color: white;
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		#Div1 {
+			position: relative;
+			background-image: url("Img/历史步伐素材包/背景图2.png");
+		}
+
+		#Div2 {
+			background-image: url("Img/历史步伐素材包/背景图3.jpg");
+		}
+
+		#Div3 {
+			background-image: url("Img/历史步伐素材包/背景图4.jpg");
+		}
+
+		.index {
+			background-size: cover;
+			/* 背景图片等比例缩放，以填满整个div */
+			background-repeat: no-repeat;
+			/* 不重复平铺背景图片 */
+			background-position: center;
+			/* 将背景图片置于div中心 */
+			width: 100%;
+			height: 720px;
+		}
+
+		.headimg1 {
+			background-size: cover;
+			/* 背景图片等比例缩放，以填满整个div */
+			background-repeat: no-repeat;
+			/* 不重复平铺背景图片 */
+			background-position: center;
+			/* 将背景图片置于div中心 */
+			width: 100%;
+			height: 100%;
+		}
+		
+		.text1 {
+			display: inline-block;
+			/* padding: 20%; */
+			margin-left: 30%;
+			font-size: 22px;
+			color: #8f5810;
+			width: 660px;
+			/* border: 1px solid #000; */
+		text-shadow: 2px 2px 10px #ffffff;
+			margin-top: 234px;
+			letter-spacing: 5px;
+			line-height: 35px;
+			z-index: 100;
+			position: relative;
+			z-index: 100;
+		}
+
+		.cont_txt {
+			position: absolute;
+			width: 80%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 45px;
+			font-weight: bold;
+			letter-spacing: 5px;
+			/* border: 1px solid #000; */
+			color: #8f5810;
+			text-align: center;
+			text-shadow: 0px 0px 10px #ffffff;
+		}
+		
+		.div1_txt {
+			position: absolute;
+			/* top: 50px; */
+			text-align: center;
+			line-height: 300px;
+			font-size: 40px;
+			letter-spacing: 20px;
+			left: 20%;
+			color: #8f5810;
+			font-weight: bold;
+			width: 400px;
+			height: 400px;
+			/* border: 1px solid #000; */
+			background: url(./Img/历史步伐素材包/西汉前缘1.png) no-repeat;
+			background-size: 100% 100%;
+			z-index: 10;
+			text-shadow: 2px 2px 10px #ffffff;
+		}
+
+		.div1_img {
+			position: absolute;
+			right: -266px;
+			top: -147px;
+			width: 300px;
+			height: 600px;
+		}
+		
+		.div1_img img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.text2 {
+			margin-left: 20%;
+			font-size: 25px;
+			width: 1000px !important;
+			margin-top: 60px !important;
+			letter-spacing: 2px;
+			line-height: 35px;
+			z-index: 100;
+			position: relative;
+			text-shadow:1px 1px 5px #ffffffce;
+		}
+
+		.txt2_img {
+			width: 570px;
+			height: 500px;
+			/* border: 1px solid #000; */
+			position: absolute;
+			bottom: -290px;
+			left: -80px;
+			z-index: -1;
+			
+		}
+
+		.txt2_img img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.text2_txt {
+			position: absolute;
+			right: 0;
+			bottom: -200px;
+			text-shadow: 2px 2px 10px #ffffff;
+			font-size: 45px;
+			color: #8f5810;
+			font-weight: bold;
+			letter-spacing: 5px;
+		}
+
+		.text3 {
+			left: 400px !important;
+			font-size: 22px !important;
+			line-height: 28px !important;
+		}
+		
+		.text3_txt {
+			margin-right: 100px; 
+			position: absolute;
+			left: -345px;
+			top: 100px;
+			font-size: 60px;
+			color: #8f5810;
+			font-weight: bold;
+			letter-spacing: 2px;
+			writing-mode: vertical-rl;
+			text-shadow: 2px 2px 10px #ffffff;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="navbar">
+		<ul>
+			<li><a href="index.html">首页</a></li>
+			<li><a href="壁画之美.html">壁画之美</a></li>
+			<li><a href="#">历史步伐</a></li>
+			<li><a href="文创产品.html">文创产品</a></li>
+		</ul>
+	</div>
+
+	<div class="container">
+		<div class="cont_txt">
+			<span>西汉前缘</span>
+			<span>隋唐盛世</span>
+			<span>西夏至元</span>
+		</div>
+		<img class="headimg1" src="Img/历史步伐素材包/背景图1.jpg" alt="Background Image">
+	</div>
+
+	<div id="Div1" class="index ">
+		<div class="div1_txt">
+			西汉前缘
+		</div>
+		<!--<img  class="index" src="Img/历史步伐素材包/背景图2.png"/>-->
+		<div class="text1">
+			<p>敦煌位于甘肃省的西部，从自然地理的位置上说，正处在河西走廊的西部尽头处。这里南接青海，西连新疆，自汉代以来一直就是中西交通的枢纽。公元前111年， 汉武帝为抵御匈奴，设敦煌郡作为边防哨所。自汉武帝开通丝绸之路后，作为西陲重镇的敦煌，成为沟通中原和西域的交通枢纽。丝绸之路沿线的商业中心，以及各种民族与文化交汇的场域。其中，佛教文化和艺术在内的中西文明在这里交汇、碰撞，这是敦煌石窟艺术产生的历史根源。</p>
+			<div class="div1_img">
+				<img class="image" src="./Img/历史步伐素材包/西汉前缘2.PNG" alt="">
+			</div>
+		</div>
+
+	</div>
+	<div id="Div2" class="index">
+		<!--<img class="index" src="Img/历史步伐素材包/背景图3.jpg"/>-->
+		<div class="text1 text2">
+			<div class="txt2_img">
+				<img class="image" src="./Img/历史步伐素材包/隋唐盛世1.PNG" alt="">
+			</div>
+			<p>隋和唐前期，敦煌成为丝绸之路的主要商业枢纽和重要的宗教中心，莫高窟也进入鼎盛时期，成为各方的朝圣之地。这一时期，莫高窟建造了大量的洞窟，其中包括两个大像龛。作为冥想的辅助，作为向不识字的人宣传佛教信仰和故事的教学工具等，这些洞窟空间及内部壁画与造像被精心营造。主要的洞窟通常由佛教僧侣、地方统治精英以及中原帝王等赞助人赞助，其他洞窟则由商旅、军官和当地的人（如妇女团体）资助。安史之乱后，建中二年（781）吐蕃占沙州（敦煌），在吐蕃赞普保护下，莫高窟得以继续发展。大中二年（848）张议潮率兵起义，收复河西十一州失地，奏表归唐。在张氏归义军政权统治的晚唐时期，张氏家属及其显贵姻亲在此继续修建。</p>
+			<div class="text2_txt">
+				隋唐盛世
+			</div>
+		</div>
+	</div>
+	<div id="Div3" class="index">
+
+		<!--<img class="index" src="Img/历史步伐素材包/背景图4.jpg"/>-->
+		<div class="text1 text2 text3">
+			<div class="text3_txt">
+				西夏至元
+			</div>
+			<p style=" writing-mode: vertical-rl; height: 550px; margin-top: 50px; ">
+				这一时期新开凿的洞窟很少。西夏多是改建旧窟，重绘壁画。壁画虽多，新题材很少，但在构图和敷彩上有特点。壁画中供养菩萨行列变得高大，多占据甬道或壁面下部的显著位置。净土变之类的经变画，构图锐意简化，有的几乎与千佛像难以区分。画面构图和人物形象都过于程式化，呆滞而缺少生气。色彩以绿为底色，用土红勾线，整个画面色调偏冷。较多地使用沥粉堆金手法，为前代所少见。元代洞窟数量很少，第465窟和第3窟的壁画代表了当时两种不同的画风。前者后室四壁和窟顶布满密宗曼荼罗和明王像，四壁下部有织布、养鸡、牧牛、制陶、驯虎、制革、踏碓等各种人物画60多幅。内容、构图形式、人物形象和敷色、线描等带有浓郁的藏画风格和阴森、神秘的情调。后者壁画属于汉族画风，以密宗千手千眼观音菩萨像为主，以细而刚劲的铁线勾描人物形体，用兰叶描和折芦描表现衣纹和飘带的转折顿挫，线描技术造诣很高。此外，第61窟甬道两壁有西夏末年、元初重画的《炽盛光佛图》和《黄道十二宫星象图》，题材为莫高窟壁画中所仅见。
+			</p>
+		</div>
+	</div>
+</body>
+<script src="./1.js"></script>
+
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>图片幻灯片</title>
+	<link rel="stylesheet" href="./style.css">
+	<style>
+		/* 全局样式 */
+		@font-face {
+			font-family: 'Onettf';
+			src: url('ttf/HanyiSentySpringBrush.ttf') format('truetype');
+
+		}
+
+		body {
+			font-family: 'Onettf', sans-serif;
+			background-color: #bc5c3c;
+			margin: 0;
+			padding: 0;
+		}
+
+		#container {
+			width: 100%;
+		}
+
+		#container img {
+			width: 100%;
+			/* 调整宽度的百分比来缩小图片，例如这里是缩小到原始尺寸的 50% */
+			display: block;
+			margin: 0 auto;
+			/* 使用 auto 的 margin 来实现居中 */
+
+		}
+
+
+		/* 导航栏样式 */
+
+		.navbar {
+			position: relative;
+			/* 需要设置 relative 以便 ::before 可以正确定位 */
+			color: #fff;
+			padding: 20px;
+			font-size: 20px;
+
+		}
+
+		.navbar::before {
+			content: "";
+			position: absolute;
+			/* 使伪元素填充整个 .navbar */
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-image: url(Img/壁画/敦煌图案介绍3.jpg);
+			filter: blur(5px);
+			/* 在这里应用滤镜效果 */
+			z-index: -1;
+			/* 确保伪元素在 .navbar 的内容后面 */
+		}
+
+		.navbar ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.navbar li {
+			display: inline-block;
+			margin-right: 10px;
+			position: relative;
+		}
+
+
+		.navbar li a {
+			color: #fff;
+			text-decoration: none;
+			padding: 5px;
+			font-size: 30px;
+			font-weight: bold;
+		}
+
+		.navbar li:hover::after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: -10px;
+			width: 100%;
+			/* width: 100%; */
+			border: 3px solid #5e3114;
+		}
+
+		.navbar li a:hover {
+			color: #5e3114;
+		}
+
+		/* 图片容器样式 */
+		.image-container {
+			display: flex;
+			margin: 5%;
+		}
+
+		.image1 {
+			width: 80% !important;
+			height: 80%;
+			display: flex !important;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin: 10% !important;
+		}
+
+		.image-container img {
+			/*height: 60px;*/
+			margin: 50px;
+			width: calc(33.33% - 100px);
+			margin-bottom: 10px;
+			object-fit: cover;
+			border-radius: 2%;
+			border: 5px solid #9b3636;
+			box-shadow: 0 0 10px #5a2222;
+			border-radius: 5px;
+		}
+
+		.containerP {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 200px;
+			/* 可以根据需要调整容器的高度 */
+		}
+
+		.containerP p {
+			width: 810px;
+			letter-spacing: 10px;
+			/* border: 1px solid #000; */
+			text-align: center;
+			line-height: 50px;
+			color: #cabba3;
+		}
+
+		p {
+			font-size: 36px;
+			/* margin: 10%; */
+		}
+
+		.cont_itex {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.cont_itex img {
+			display: inline-block !important;
+			width: 400px !important;
+			/* border: 1px solid #000; */
+			position: relative;
+			top: -140px;
+
+		}
+
+		.cont_itex p {
+			display: inline-block;
+			/* border: 1px solid #000; */
+			width: 500px;
+			height: 146px;
+			background: url(./Img/文创设计/标题框（任取四个）.png) no-repeat;
+			background-position: 50% 56%;
+			background-size: 137% 791%;
+			text-align: center;
+			line-height: 146px;
+			font-size: 35px;
+			letter-spacing: 15px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="navbar">
+			<ul>
+				<li><a href="index.html">首页</a></li>
+				<li><a href="壁画之美.html">壁画之美</a></li>
+				<li><a href="历史步伐.html">历史步伐</a></li>
+				<li><a href="#">文创产品</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+			<img src="Img/文创设计/首图.jpg">
+			<img class="image image1" src="Img/文创设计/产品.jpg" alt="Second Image">
+			<div class="cont_itex">
+				<img src="./Img/文创设计/小云.png" alt="">
+				<p style="margin-left: 15%;">鹿王本生</p>
+			</div>
+		</div>
+
+		<div class="image-container">
+			<img class="image" src="Img/文创设计/鹿王本生1.png">
+			<img class="image" src="Img/文创设计/鹿王本生2.png">
+			<img class="image" src="Img/文创设计/鹿王本生3.png">
+		</div>
+
+		<div class="containerP">
+			<p>
+				设计提取自敦煌莫高窟第257窟的北魏时期壁画
+				《鹿王本生图》九色鹿王形象鹿王矫健勺称，神情倔强
+				背景莲花是清、净、德,美好情感的象征
+			</p>
+
+
+		</div>
+
+		<div class="cont_itex">
+			<p style="margin-left: 20%;">反弹琵琶</p>
+		</div>
+		<div class="image-container">
+			<img class="image" src="Img/文创设计/反弹琵琶1.png">
+			<img class="image" src="Img/文创设计/反弹琵琶2.png">
+			<img class="image" src="Img/文创设计/反弹琵琶3.png">
+		</div>
+
+		<div class="containerP">
+			<p>
+				设计提取自中唐-莫高窟第112窟
+				观无量寿经变中反弹琵琶伎乐天
+				仙乐翩翩，神情悠闲雍容
+			</p>
+		</div>
+		<div class="cont_itex">
+			<p style="margin-left: 55%;">三耳兔</p>
+		</div>
+		<div class="image-container">
+			<img class="image" src="Img/文创设计/三耳兔1.png">
+			<img class="image" src="Img/文创设计/三耳兔2.png">
+			<img class="image" src="Img/文创设计/三耳兔3.png">
+		</div>
+
+		<div class="containerP">
+			<p>
+				设计提取自敦煌莫高窟407窟三兔共耳相逐藻井
+				三只兔子联成一个旋转的整体产生一兔双耳之感
+				隋代藻井的代表作之一
+			</p>
+		</div>
+		<div class="cont_itex">
+			<p style="margin-left: 20%;">献花飞天</p>
+		</div>
+		<div class="image-container">
+			<img class="image" src="Img/文创设计/献花飞天1.png">
+			<img class="image" src="Img/文创设计/献花飞天2.png">
+			<img class="image" src="Img/文创设计/献花飞天3.png">
+		</div>
+
+		<div class="containerP">
+			<p>
+				飞天丰肌秀骨，珠光宝气
+				一手持莲花花盘，一手拈牡丹花蕾，飞身而降
+				线描流畅有力，用色绚丽多彩，层层迭染
+			</p>
+		</div>
+	</div>
+
+	<div id="container">
+		<img src="Img/文创设计/底图.jpg" alt="First Image">
+
+	</div>
+</body>
+<script src="./1.js"></script>
+
+</html>

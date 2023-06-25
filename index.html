@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>图片幻灯片</title>
+  <style>
+    /* 自定义样式 */
+    @font-face {
+      font-family: 'Onettf';
+      src: url('ttf/SentyGoldenBell.ttf') format('truetype');
+
+    }
+
+    body {
+      font-family: 'Onettf', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e19450;
+    }
+
+    .module-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+    }
+
+    .module {
+      width: 300px;
+      height: 100px;
+      position: relative;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 20px;
+      border-radius: 5%;
+      border-color: #fff;
+      border-style: solid;
+      border-width: 5px;
+      box-shadow: 0 0 10px #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .module-text {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 40px;
+      color: white;
+    }
+
+    .footer {
+      background-image: url('Img/首页/底部.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 300px;
+      position: relative;
+      /* 添加相对定位 */
+    }
+
+    .footer::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(255, 255, 255, 0) 50%, rgba(225, 148, 80, 1) 100%);
+    }
+
+    .footer-text {
+      text-align: center;
+      padding-top: 20px;
+      font-size: 22px;
+      position: absolute;
+      /* 添加绝对定位 */
+      left: 0;
+      right: 0;
+      bottom: 20px;
+    }
+
+    .footer-text a {
+      text-decoration: none;
+      color: #000;
+      margin: 0 10px;
+    }
+
+    .header-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .colored-div {
+      background-color: #ffffff;
+      /* 修改背景色为白色 */
+      width: auto;
+      /* 修改宽度，以便在一行内放入两个元素 */
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      margin: auto;
+      border-radius: 2%;
+
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .text {
+      font-size: 22px;
+    }
+
+    .navbar {
+      position: relative;
+      /* 需要设置 relative 以便 ::before 可以正确定位 */
+      color: #fff;
+      padding: 20px;
+      font-size: 20px;
+
+    }
+
+    .navbar::before {
+      content: "";
+      position: absolute;
+      /* 使伪元素填充整个 .navbar */
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: url(Img/壁画/敦煌图案介绍3.jpg);
+      filter: blur(5px);
+      /* 在这里应用滤镜效果 */
+      z-index: -1;
+      /* 确保伪元素在 .navbar 的内容后面 */
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar li {
+      display: inline-block;
+      margin-right: 10px;
+      position: relative;
+    }
+
+
+    .navbar li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .navbar li:hover::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: -10px;
+      width: 100%;
+      /* width: 100%; */
+      border: 3px solid #5e3114;
+    }
+
+    .navbar li a:hover {
+      color: #5e3114;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      height: 750px;
+      width: 100%;
+    }
+
+    .slideshow {
+      width: 600px;
+      height: 400px;
+      position: relative;
+      margin: auto;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 动画效果 */
+    @keyframes slideAnimation {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .slide {
+      animation: slideAnimation 1s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <ul>
+      <li><a href="#">首页</a></li>
+      <li><a href="壁画之美.html">壁画之美</a></li>
+      <li><a href="历史步伐.html">历史步伐</a></li>
+      <li><a href="文创产品.html">文创产品</a></li>
+    </ul>
+  </div>
+  <img class="header-image" src="Img/首页/首图.jpg" alt="Header Image">
+  <div class="container">
+    <div class="colored-div">
+      <h2 class="title">博物馆</h2>
+      <p class="text">
+        放眼世界，任何一个文化遗址、博物馆都取代不了它<br>一千多年的风沙<br>带来了西域的胡风、北朝的融合、盛唐的丽华...<br>五万多平方米的壁画<br>点缀着飘逸飞天、漫天神佛、人间烟火..<br>八百多个错落的洞窟(包含莫高、榆林等)<br>目睹了近千年的埋藏、令人痛心的流散，以及曲折多艰的保护...
+
+        <br>敦煌
+        <br>有生生不息的力量 有绵延不绝的希望
+
+        <br>古人以“朝拜者”姿态，走进石窟与众神对望
+        <br>今人又将以何种方式，去观看这一千年宝藏?
+      </p>
+    </div>
+
+    <div class="slideshow" id="slideshow"> </div>
+  </div>
+
+  <div class="module-container">
+    <div class="module" style="background-image: url('Img/首页/块1.jpg');margin-left: 10%;"
+      onclick="location.href='壁画之美.html'">
+      <div class="module-text">壁画之美</div>
+    </div>
+    <div class="module" style="background-image: url('Img/首页/块3.jpg');" onclick="location.href='历史步伐.html'">
+      <div class="module-text">历史步伐</div>
+    </div>
+    <div class="module" style="background-image: url('Img/首页/块1.jpg');margin-right: 10%;"
+      onclick="location.href='文创产品.html'">
+      <div class="module-text">文创产品</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">
+      相关链接：
+      <a href="https://www.chnmuseum.cn/">中国国家博物馆</a>
+      <a href="https://www.dpm.org.cn/">故宫博物院</a>
+      <a href="http://www.dha.ac.cn/">敦煌研究院</a>
+      <a href="http://www.gansumuseum.com/">甘肃博物馆</a>
+      <br />
+      <p> 联系我们：18600114514 ⼁ 022-01919810</p>
+    </div>
+  </div>
+
+
+  <script>
+    // JavaScript代码，用于控制幻灯片的切换
+    const slideshow = document.getElementById('slideshow');
+    const images = [
+      'img/首页/轮播1.jpg',
+      'img/首页/轮播2.jpg',
+      'img/首页/轮播3.jpg'
+    ];
+    let currentSlide = 0;
+
+    function createSlide(imageUrl) {
+      const slide = document.createElement('div');
+      slide.classList.add('slide');
+      if (currentSlide === 0) {
+        slide.classList.add('active');
+      }
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = 'Slide ' + (currentSlide + 1);
+      slide.appendChild(img);
+      return slide;
+    }
+
+    function showSlide(index) {
+      const slides = slideshow.querySelectorAll('.slide');
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % images.length;
+      showSlide(currentSlide);
+    }
+
+    // 创建幻灯片
+    images.forEach(imageUrl => {
+      const slide = createSlide(imageUrl);
+      slideshow.appendChild(slide);
+    });
+
+    // 自动切换幻灯片的时间间隔（单位：毫秒）
+    const interval = 3000;
+    setInterval(nextSlide, interval);
+  </script>
+</body>
+
+</html>
